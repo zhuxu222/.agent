@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Python Project uv"
+  short_description: "Enforce uv-managed project Python environments."
+  default_prompt: "Use $python-project-uv to set up or repair a uv-managed project Python environment."

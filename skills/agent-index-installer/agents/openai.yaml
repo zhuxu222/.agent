@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Index Installer"
+  short_description: "Install or upgrade project-level indexing skills and tools."
+  default_prompt: "Use $agent-index-installer to install project-level index skills and wrappers."

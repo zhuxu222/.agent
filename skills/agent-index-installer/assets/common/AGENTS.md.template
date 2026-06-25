@@ -1,0 +1,27 @@
+﻿# Agent Instructions
+
+Use indexed code intelligence before broad grep or guessing.
+
+Project index manifest:
+
+- `.agent-index/agent-index.yaml`
+
+Project skills:
+
+- `.agents/skills/agent-index-router`
+- `.agents/skills/agent-index-workspace`
+- `.agents/skills/agent-index-lifecycle`
+
+Rules:
+
+- Use project-level skills under `.agents/skills`.
+- For initial workspace setup, use `.agents/skills/agent-index-workspace/scripts/initialize-workspace.ps1`.
+- Do not run workspace manifest update and repo exclude maintenance in parallel.
+- Use lifecycle skills for setup, refresh, validation, repair, and provider changes.
+- Use usage skills for daily retrieval and analysis.
+- For cleanup of repo-local index artifacts, use `.agents/skills/agent-index-workspace/scripts/clean-project-index.ps1`; pass `-StopProjectMcp` only when intentionally stopping this project's MCP process tree.
+- After stopping project MCP processes, restart the Codex session before MCP tool verification.
+- Do not run bare `gitnexus` or bare `npx gitnexus`; use project wrappers under `.agent-index/bin`.
+- Do not create repo-local `AGENTS.md`, `CLAUDE.md`, or `.claude/skills/...` from GitNexus.
+- Project workspace/lifecycle scripts maintain child repo `.git/info/exclude` entries for local index directories such as `.codegraph/`, `.gitnexus/`, and `.understand-anything/`.
+

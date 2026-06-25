@@ -1,0 +1,55 @@
+version: 1
+project: <project-name>
+
+workspace:
+  repo_roots:
+    - repos
+  discovery:
+    recursive: true
+    max_depth: 8
+  exclude_dirs:
+    - .agent-index
+    - .agents
+    - .codex
+    - .codegraph
+    - .gitnexus
+    - .understand-anything
+    - node_modules
+
+index_system:
+  entry_skill: agent-index-router
+  workspace_skill: agent-index-workspace
+  lifecycle_skill: agent-index-lifecycle
+
+providers:
+  codegraph:
+    enabled: true
+    lifecycle_skill: agent-index-codegraph
+    usage_skill: agent-codegraph-usage
+    scope: code
+    index_scope: repo
+    wrapper: .agent-index/bin/codegraph.ps1
+    mcp: .agent-index/bin/codegraph-mcp.ps1
+
+  gitnexus:
+    enabled: true
+    lifecycle_skill: agent-index-gitnexus
+    usage_skill: agent-gitnexus-usage
+    scope: architecture-impact
+    index_scope: repo-group
+    wrapper: .agent-index/bin/gitnexus.ps1
+    mcp: .agent-index/bin/gitnexus-mcp.ps1
+    home: .agent-index/gitnexus-home
+    group: <project-name>
+    max_file_size: 256KB
+    optional_grammars:
+      dart: false
+      proto: false
+
+repos: []
+
+policies:
+  prefer_indexed_retrieval: true
+  no_parent_codegraph: true
+  no_repo_local_agent_files: true
+  clean_gitnexus_repo_skills: true

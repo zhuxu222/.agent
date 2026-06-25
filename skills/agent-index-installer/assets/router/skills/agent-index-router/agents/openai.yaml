@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Agent Index Router"
+  short_description: "Route index lifecycle and usage skills."
+  default_prompt: "Use $agent-index-router to route an indexing task to the right provider skill."

@@ -1,0 +1,7 @@
+[mcp_servers.gitnexus]
+command = "powershell"
+args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "<project-root>/.agent-index/bin/gitnexus-mcp.ps1"]
+
+[mcp_servers.codegraph]
+command = "powershell"
+args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "<project-root>/.agent-index/bin/codegraph-mcp.ps1"]

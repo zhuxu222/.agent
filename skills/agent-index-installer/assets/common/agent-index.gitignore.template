@@ -1,0 +1,7 @@
+/npm-cache/
+/xdg-config/
+/gitnexus-home/*
+!/gitnexus-home/.gitignore
+!/gitnexus-home/groups/
+!/gitnexus-home/groups/*/
+!/gitnexus-home/groups/*/group.yaml

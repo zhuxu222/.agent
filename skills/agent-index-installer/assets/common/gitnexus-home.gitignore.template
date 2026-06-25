@@ -1,0 +1,6 @@
+/*
+!.gitignore
+!/groups/
+/groups/*
+!/groups/*/
+!/groups/*/group.yaml

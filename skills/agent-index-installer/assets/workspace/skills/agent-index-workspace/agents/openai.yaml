@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Index Workspace"
+  short_description: "Initialize, clean, and maintain project index workspace state."
+  default_prompt: "Use $agent-index-workspace to initialize, clean, or maintain project index workspace state."

@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Index Lifecycle"
+  short_description: "Build, refresh, validate, or repair project indexes."
+  default_prompt: "Use $agent-index-lifecycle to run project index build, refresh, validate, repair, or status workflows."

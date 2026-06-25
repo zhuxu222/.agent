@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "CodeGraph Usage"
+  short_description: "Use CodeGraph for precise repo-local code context."
+  default_prompt: "Use $agent-codegraph-usage to retrieve precise repo-local code context."

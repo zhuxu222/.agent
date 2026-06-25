@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "CodeGraph Lifecycle"
+  short_description: "Configure and maintain CodeGraph indexes."
+  default_prompt: "Use $agent-index-codegraph to build, refresh, validate, or repair CodeGraph indexes."

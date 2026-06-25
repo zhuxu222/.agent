@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "GitNexus Usage"
+  short_description: "Use GitNexus for architecture, flow, impact, and cross-repo context."
+  default_prompt: "Use $agent-gitnexus-usage to analyze architecture, execution flow, impact, or repo groups."

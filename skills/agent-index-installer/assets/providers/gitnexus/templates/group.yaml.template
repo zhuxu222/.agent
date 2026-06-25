@@ -1,0 +1,25 @@
+version: 1
+name: agent-tools
+description: ''
+repos:
+  tools/codegraph: agent-tools-codegraph
+  tools/gitnexus: agent-tools-gitnexus
+  tools/graphify: agent-tools-graphify
+  tools/understand-anything: agent-tools-understand-anything
+links: []
+packages: {}
+detect:
+  http: true
+  grpc: true
+  thrift: true
+  topics: true
+  shared_libs: true
+  embedding_fallback: true
+  includes: false
+  workspace_deps: false
+matching:
+  bm25_threshold: 0.7
+  embedding_threshold: 0.65
+  max_candidates_per_step: 3
+  exclude_links_paths: []
+  exclude_links_param_only_paths: false

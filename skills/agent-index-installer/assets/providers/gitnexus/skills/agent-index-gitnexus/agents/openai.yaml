@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "GitNexus Lifecycle"
+  short_description: "Configure and maintain GitNexus indexes."
+  default_prompt: "Use $agent-index-gitnexus to build, refresh, validate, or repair GitNexus indexes."
