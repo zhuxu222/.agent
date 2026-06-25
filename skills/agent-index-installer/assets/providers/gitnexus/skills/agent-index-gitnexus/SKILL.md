@@ -9,20 +9,22 @@ Use this provider lifecycle skill for GitNexus index maintenance.
 
 ## Provider Interface
 
-```powershell
-.\.agents\skills\agent-index-gitnexus\scripts\build.ps1
-.\.agents\skills\agent-index-gitnexus\scripts\refresh.ps1
-.\.agents\skills\agent-index-gitnexus\scripts\validate.ps1
-.\.agents\skills\agent-index-gitnexus\scripts\repair.ps1
-.\.agents\skills\agent-index-gitnexus\scripts\status.ps1
+```text
+.agent-index/bin/agent-index provider gitnexus index
+.agent-index/bin/agent-index provider gitnexus status
+.agent-index/bin/agent-index provider gitnexus repair
+.agent-index/bin/agent-index provider gitnexus clean-injections
+.agent-index/bin/agent-index provider gitnexus mcp
 ```
 
-Pass `-ProjectRoot <path>` when running from outside the project root.
+On Windows, use `.agent-index\bin\agent-index.cmd` with the same arguments.
+
+Pass `--project-root <path>` before `provider` when running from outside the project root.
 
 ## Policy
 
 - Keep GitNexus code indexes repo-level.
 - Keep GitNexus registry, groups, and contracts project-local under `.agent-index/gitnexus-home`.
 - Do not generate repo-local `AGENTS.md`, `CLAUDE.md`, or `.claude/skills/...`.
-- Use `.agent-index/bin/gitnexus.ps1`; do not use bare `gitnexus` or bare `npx gitnexus`.
+- Use `.agent-index/bin/agent-index provider gitnexus`; do not use bare `gitnexus` or bare `npx gitnexus`.
 - Daily architecture and impact queries belong in `agent-gitnexus-usage`.

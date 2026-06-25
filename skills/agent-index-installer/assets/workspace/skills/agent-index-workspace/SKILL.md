@@ -9,49 +9,41 @@ Use this skill for project-level workspace facts. It does not build provider ind
 
 ## Commands
 
+Use the project-local Python launcher.
+
 Discover configured git repos:
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\.agents\skills\agent-index-workspace\scripts\discover-repos.ps1
+```text
+.agent-index/bin/agent-index workspace discover
 ```
 
-Update the manifest `repos:` section from configured git repos:
+Update the manifest `repos:` section, update GitNexus group metadata, maintain child repo excludes, and validate:
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\.agents\skills\agent-index-workspace\scripts\update-manifest-repos.ps1
-```
-
-Initialize the workspace in the required serial order:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\.agents\skills\agent-index-workspace\scripts\initialize-workspace.ps1
+```text
+.agent-index/bin/agent-index workspace init
 ```
 
 Validate manifest and configured paths:
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\.agents\skills\agent-index-workspace\scripts\validate-manifest.ps1
+```text
+.agent-index/bin/agent-index workspace validate
 ```
 
-Ensure child repos hide local index directories from `git status`:
+Clean generated project-local index assets:
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\.agents\skills\agent-index-workspace\scripts\ensure-repo-excludes.ps1
+```text
+.agent-index/bin/agent-index clean
 ```
 
-Clean repo-local index artifacts with a project MCP guard:
+Clean generated project-local assets and GitNexus repo-local skill injections:
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\.agents\skills\agent-index-workspace\scripts\clean-project-index.ps1
+```text
+.agent-index/bin/agent-index clean --include-repo-injections
 ```
 
-If project MCP processes are running and cleanup is intentional:
+On Windows, use `.agent-index\bin\agent-index.cmd` with the same arguments.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\.agents\skills\agent-index-workspace\scripts\clean-project-index.ps1 -StopProjectMcp
-```
-
-Pass `-ProjectRoot <path>` when running from outside the project root.
+Pass `--project-root <path>` before the subcommand when running from outside the project root.
 
 ## Rules
 
@@ -59,10 +51,9 @@ Pass `-ProjectRoot <path>` when running from outside the project root.
 - Discover repos from `workspace.repo_roots` when configured. If no workspace configuration exists, preserve the legacy behavior: direct child directories with `.git`.
 - Recursive discovery is controlled by `workspace.discovery.recursive` / `workspace.recursive` and `workspace.discovery.max_depth` / `workspace.max_depth`.
 - Stop descending once a `.git` file or directory is found, so a nested submodule is not indexed twice when its parent repo is selected.
-- For setup, prefer `initialize-workspace.ps1`; do not run manifest update and exclude maintenance in parallel.
+- For setup, prefer `agent-index workspace init`; do not run manifest update and exclude maintenance in parallel.
 - Maintain child repo `.git/info/exclude` entries for local index directories such as `.codegraph/`, `.gitnexus/`, and `.understand-anything/`.
-- `clean-project-index.ps1` removes index artifacts only; it does not remove installed `.agents`, `.codex`, `AGENTS.md`, or the manifest.
-- If cleanup stops project MCP processes, restart the Codex session before MCP tool verification.
+- `agent-index clean` removes generated project-local index assets; it does not remove installed `.agents`, `.codex`, `AGENTS.md`, or the manifest.
 - Do not build CodeGraph or GitNexus indexes here; route that to `agent-index-lifecycle`.
 - Keep generated repo names stable from the full project-relative repo path: `<project>-<repo-path-normalized>`.
 

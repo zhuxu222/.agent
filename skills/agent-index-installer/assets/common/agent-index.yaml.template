@@ -28,8 +28,8 @@ providers:
     usage_skill: agent-codegraph-usage
     scope: code
     index_scope: repo
-    wrapper: .agent-index/bin/codegraph.ps1
-    mcp: .agent-index/bin/codegraph-mcp.ps1
+    wrapper: .agent-index/bin/agent-index.py provider codegraph index
+    mcp: .agent-index/bin/agent-index.py provider codegraph mcp
 
   gitnexus:
     enabled: true
@@ -37,8 +37,8 @@ providers:
     usage_skill: agent-gitnexus-usage
     scope: architecture-impact
     index_scope: repo-group
-    wrapper: .agent-index/bin/gitnexus.ps1
-    mcp: .agent-index/bin/gitnexus-mcp.ps1
+    wrapper: .agent-index/bin/agent-index.py provider gitnexus index
+    mcp: .agent-index/bin/agent-index.py provider gitnexus mcp
     home: .agent-index/gitnexus-home
     group: <project-name>
     max_file_size: 256KB

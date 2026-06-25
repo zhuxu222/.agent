@@ -9,19 +9,34 @@ Use this user-level skill only to install or upgrade project-level indexing capa
 
 ## Commands
 
-Install into the current project:
+Run the source Python CLI from the `.agents` checkout. Use the uv-managed source environment when it exists.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File C:\Users\zhuxu\.agents\skills\agent-index-installer\scripts\install-project-index.ps1
+Install into a project:
+
+```text
+<agents-root>/.venv/bin/python <agents-root>/scripts/agent-index.py --project-root <project-root> install
+```
+
+Windows equivalent:
+
+```text
+<agents-root>\.venv\Scripts\python.exe <agents-root>\scripts\agent-index.py --project-root <project-root> install
 ```
 
 Upgrade project skills and wrappers:
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File C:\Users\zhuxu\.agents\skills\agent-index-installer\scripts\upgrade-project-index.ps1
+```text
+<agents-root>/.venv/bin/python <agents-root>/scripts/agent-index.py --project-root <project-root> upgrade
 ```
 
-Pass `-ProjectRoot <path>` when running from outside the project root.
+If the source virtual environment is missing, create it with uv first and install the CLI dependencies:
+
+```text
+uv venv <agents-root>/.venv --python 3.12
+uv pip install --python <agents-root>/.venv/bin/python PyYAML psutil
+```
+
+On Windows, the created interpreter is `<agents-root>\.venv\Scripts\python.exe`.
 
 ## Default Workspace Layout
 
@@ -37,15 +52,17 @@ workspace:
 ```
 
 Project-level workspace initialization discovers git repos under configured roots, supports multi-level subdirectories, and stops descending once a `.git` file or directory is found.
+
 ## Scope
 
 This installer may:
 
 - copy project skills to `.agents/skills`
-- copy provider wrappers to `.agent-index/bin`
+- copy the Python CLI and launchers to `.agent-index/bin` and `.agent-index/tools`
 - create `.agent-index/agent-index.yaml` if missing
 - create `.codex/config.toml` if missing
 - create or update a minimal `AGENTS.md` indexing section
+- create a project-local `.agent-index/.venv` with uv unless `--skip-venv` is used
 
 This installer must not:
 
@@ -58,12 +75,18 @@ This installer must not:
 
 After installation, use project-level skills:
 
-- `agent-index-workspace` for workspace initialization, repo discovery, cleanup of index artifacts, and manifest maintenance
+- `agent-index-workspace` for workspace initialization, repo discovery, cleanup of generated index assets, and manifest maintenance
 - `agent-index-lifecycle` for build, refresh, validate, repair, and status
 - provider usage skills for daily retrieval
 
 Recommended first project command:
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\.agents\skills\agent-index-workspace\scripts\initialize-workspace.ps1
+```text
+.agent-index/bin/agent-index workspace init
+```
+
+Windows equivalent:
+
+```text
+.agent-index\bin\agent-index.cmd workspace init
 ```

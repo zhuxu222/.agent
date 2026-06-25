@@ -5,35 +5,35 @@ description: Orchestrate project index lifecycle across enabled providers. Use f
 
 # Agent Index Lifecycle
 
-Use this skill to coordinate enabled providers. Provider internals stay in provider lifecycle skills.
+Use this skill to coordinate enabled providers through the project-local Python CLI.
 
 ## Command
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\.agents\skills\agent-index-lifecycle\scripts\invoke-agent-index-lifecycle.ps1 -Mode Validate
+```text
+.agent-index/bin/agent-index lifecycle validate
 ```
 
-Supported modes:
+On Windows, use `.agent-index\bin\agent-index.cmd lifecycle validate`.
 
-- `Build`: create or force rebuild provider indexes, then validate.
-- `Refresh`: incremental update/sync provider indexes, then validate.
-- `Validate`: validate configured provider indexes.
-- `Repair`: run provider repair, then validate.
-- `Status`: show provider status without repair.
+Supported actions:
 
-Pass `-ProjectRoot <path>` when running from outside the project root.
+- `build`: create provider indexes.
+- `refresh`: incremental update/sync provider indexes.
+- `validate`: validate configured provider indexes.
+- `repair`: run provider repair.
+- `status`: show provider status without repair.
+
+Pass `--project-root <path>` before `lifecycle` when running from outside the project root.
 
 ## Workflow
 
 1. Validate `.agent-index/agent-index.yaml` exists.
-2. Read enabled providers and their `lifecycle_skill`.
-3. Ensure child repo `.git/info/exclude` entries hide local index directories.
-4. Dispatch to the matching project skill script under `.agents/skills/<lifecycle_skill>/scripts/`.
-5. Run `validate.ps1` after `Build`, `Refresh`, or `Repair`.
-6. Report provider failures separately.
+2. Read enabled providers.
+3. Dispatch each provider through `.agent-index/bin/agent-index provider <provider> <action>`.
+4. Report provider failures separately.
 
 ## Rules
 
-- Do not hard-code provider commands here.
-- Require providers to expose `build.ps1`, `refresh.ps1`, `validate.ps1`, `repair.ps1`, and `status.ps1` when supported.
-- If a provider script is missing, fail clearly with the expected path.
+- Do not hard-code provider executables outside the Python CLI.
+- Keep provider-specific policy in provider lifecycle skills.
+- Use lowercase CLI actions exactly as shown above.

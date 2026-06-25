@@ -1,4 +1,4 @@
-﻿# Local/editor noise
+# Local/editor noise
 .DS_Store
 Thumbs.db
 *.log
@@ -6,3 +6,5 @@ Thumbs.db
 # Python cache
 __pycache__/
 *.py[cod]
+.venv/
+.uv-cache/

@@ -21,7 +21,8 @@ Use this skill as the light project-level entry point. It routes work; it does n
 ## Rules
 
 - Prefer indexed retrieval before broad grep or guessing.
-- Use project wrappers under `.agent-index/bin`; do not use bare `gitnexus` or bare `npx gitnexus`.
+- Use the project wrapper `.agent-index/bin/agent-index` or `.agent-index\bin\agent-index.cmd`; do not use bare `gitnexus` or bare `npx gitnexus`.
 - Keep provider-specific setup in provider lifecycle skills.
 - Keep daily code/architecture retrieval in provider usage skills.
 - Do not create repo-local `AGENTS.md`, `CLAUDE.md`, or `.claude/skills/...` from GitNexus.
+
