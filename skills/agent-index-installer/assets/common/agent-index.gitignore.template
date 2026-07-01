@@ -1,3 +1,5 @@
+/.venv/
+/.uv-cache/
 /npm-cache/
 /xdg-config/
 /gitnexus-home/*

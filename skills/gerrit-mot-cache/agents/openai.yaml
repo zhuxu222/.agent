@@ -1,0 +1,6 @@
+interface:
+  display_name: "Gerrit MOT Cache"
+  short_description: "Use local master-only cache for Gerrit repositories."
+  default_prompt: "Use $gerrit-mot-cache to clone a https://gerrit.mot.com repository with the local cache workflow."
+policy:
+  allow_implicit_invocation: true
